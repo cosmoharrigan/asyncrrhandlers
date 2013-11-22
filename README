@@ -1,4 +1,4 @@
-Asynchronous request-reply single-threaded server in Python
+ZeroMQ example asynchronous request-reply single-threaded server in C#
 that spawns a request handler each time a request is received
 
 This is different from other examples because the number of request handler threads is not defined ahead of time.
