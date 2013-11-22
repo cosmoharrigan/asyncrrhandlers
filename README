@@ -1,0 +1,21 @@
+Asynchronous request-reply single-threaded server in Python
+that spawns a request handler each time a request is received
+
+This is different from other examples because the number of request handler threads is not defined ahead of time.
+
+Request:
+Client DEALER --> Server ROUTER --> Request handler (spawned)
+1. Clients send requests via a DEALER socket on port 5570
+2. Server receives requests via a ROUTER socket on port 5570
+3. Server passes both the request and the client identity directly to request handlers when they are spawned
+
+Reply:
+Client DEALER <-- Server ROUTER <-- Server DEALER <-- Request handler DEALER
+1. Request handler returns the reply to the Server via a DEALER socket on inproc
+2. Server receives the reply from the request handler via a DEALER socket on inproc
+3. Server sends the reply to the client via a ROUTER socket on port 5570
+4. Client receives the reply via a DEALER socket on port 5570
+
+Authors:
+Cosmo Harrigan, ChannelAgility LLC
+Noel Buenaventura, ChannelAgility LLC
